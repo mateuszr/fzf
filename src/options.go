@@ -155,6 +155,7 @@ type Options struct {
 	FuzzyAlgo   algo.Algo
 	Extended    bool
 	Case        Case
+	Command     string
 	Normalize   bool
 	Nth         []Range
 	WithNth     []Range
@@ -208,6 +209,7 @@ func defaultOptions() *Options {
 		FuzzyAlgo:   algo.FuzzyMatchV2,
 		Extended:    true,
 		Case:        CaseSmart,
+		Command:     "",
 		Normalize:   true,
 		Nth:         make([]Range, 0),
 		WithNth:     make([]Range, 0),
@@ -998,6 +1000,8 @@ func parseOptions(opts *Options, allArgs []string) {
 			opts.Fuzzy = true
 		case "-q", "--query":
 			opts.Query = nextString(allArgs, &i, "query string required")
+		case "-c", "--cmd":
+			opts.Command = nextString(allArgs, &i, "command string required")
 		case "-f", "--filter":
 			filter := nextString(allArgs, &i, "query string required")
 			opts.Filter = &filter
